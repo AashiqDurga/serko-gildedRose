@@ -5,7 +5,7 @@ namespace csharpcore
     public class GildedRose
     {
         private const string AgedBrie = "Aged Brie";
-        private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
+        private const string BackstagePass = "Backstage passes to a TAFKAL80ETC concert";
         private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
         IList<Item> Items;
 
@@ -18,9 +18,13 @@ namespace csharpcore
                 {
                     HandleAgedBrie(item);
                 }
+                else if (item.Name == BackstagePass)
+                {
+                    HandleBackstagePass(item);
+                }
                 else
                 {
-                    if (item.Name != BackstagePasses)
+                    if (item.Name != BackstagePass)
                     {
                         DecreaseQuality(item);
                     }
@@ -30,7 +34,7 @@ namespace csharpcore
                         {
                             item.Quality = item.Quality + 1;
 
-                            if (item.Name == BackstagePasses)
+                            if (item.Name == BackstagePass)
                             {
                                 if (item.SellIn < 11)
                                 {
@@ -49,6 +53,24 @@ namespace csharpcore
                     HandleItemsWithSellInLessThanZero(item);
                 }
             }
+        }
+
+        private static void HandleBackstagePass(Item item)
+        {
+            IncreaseQuality(item);
+            
+            if (item.SellIn < 11)
+            {
+                IncreaseQuality(item);
+            }
+
+            if (item.SellIn < 6)
+            {
+                IncreaseQuality(item);
+            }
+            
+            DecreaseSellIn(item);
+            HandleItemsWithSellInLessThanZero(item);
         }
 
         private static void HandleAgedBrie(Item item)
@@ -85,7 +107,7 @@ namespace csharpcore
         {
             if (item.SellIn < 0)
             {
-                if (item.Name != BackstagePasses)
+                if (item.Name != BackstagePass)
                 {
                     if (item.Quality > 0)
                     {
