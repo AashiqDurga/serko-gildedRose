@@ -12,77 +12,93 @@ namespace csharpcore
         public void UpdateQuality(IList<Item> items)
         {
             Items = items;
-            for (var i = 0; i < Items.Count; i++)
+            foreach (var item in Items)
             {
-                if (Items[i].Name != AgedBrie && Items[i].Name != BackstagePasses)
+                if (item.Name != AgedBrie && item.Name != BackstagePasses)
                 {
-                    if (Items[i].Quality > 0)
-                    {
-                        if (Items[i].Name != SulfurasHandOfRagnaros)
-                        {
-                            Items[i].Quality = Items[i].Quality - 1;
-                        }
-                    }
+                    DecreaseQuality(item);
                 }
                 else
                 {
-                    if (Items[i].Quality < 50)
+                    if (item.Quality < 50)
                     {
-                        Items[i].Quality = Items[i].Quality + 1;
+                        item.Quality = item.Quality + 1;
 
-                        if (Items[i].Name == BackstagePasses)
+                        if (item.Name == BackstagePasses)
                         {
-                            if (Items[i].SellIn < 11)
+                            if (item.SellIn < 11)
                             {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
+                                IncreaseQuality(item);
                             }
 
-                            if (Items[i].SellIn < 6)
+                            if (item.SellIn < 6)
                             {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
+                                IncreaseQuality(item);
                             }
                         }
                     }
                 }
 
-                if (Items[i].Name != SulfurasHandOfRagnaros)
-                {
-                    Items[i].SellIn = Items[i].SellIn - 1;
-                }
+                DecreaseSellIn(item);
+                HandleItemsWithSellInLessThanZero(item);
+            }
+        }
 
-                if (Items[i].SellIn < 0)
+        private static void IncreaseQuality(Item item)
+        {
+            if (item.Quality < 50)
+            {
+                item.Quality = item.Quality + 1;
+            }
+        }
+
+        private static void DecreaseQuality(Item item)
+        {
+            if (item.Quality > 0)
+            {
+                if (item.Name != SulfurasHandOfRagnaros)
                 {
-                    if (Items[i].Name != AgedBrie)
+                    item.Quality = item.Quality - 1;
+                }
+            }
+        }
+
+        private static void HandleItemsWithSellInLessThanZero(Item item)
+        {
+            if (item.SellIn < 0)
+            {
+                if (item.Name != AgedBrie)
+                {
+                    if (item.Name != BackstagePasses)
                     {
-                        if (Items[i].Name != BackstagePasses)
+                        if (item.Quality > 0)
                         {
-                            if (Items[i].Quality > 0)
+                            if (item.Name != SulfurasHandOfRagnaros)
                             {
-                                if (Items[i].Name != SulfurasHandOfRagnaros)
-                                {
-                                    Items[i].Quality = Items[i].Quality - 1;
-                                }
+                                item.Quality = item.Quality - 1;
                             }
-                        }
-                        else
-                        {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
                         }
                     }
                     else
                     {
-                        if (Items[i].Quality < 50)
-                        {
-                            Items[i].Quality = Items[i].Quality + 1;
-                        }
+                        item.Quality = item.Quality - item.Quality;
                     }
                 }
+                else
+                {
+                    if (item.Quality < 50)
+                    {
+                        item.Quality = item.Quality + 1;
+                    }
+                }
+            }
+        }
+
+        private static void DecreaseSellIn(Item item)
+        {
+            if (item.Name != SulfurasHandOfRagnaros)
+            {
+                item.SellIn = item.SellIn - 1;
             }
         }
     }
