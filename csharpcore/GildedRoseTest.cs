@@ -28,6 +28,34 @@ namespace csharpcore
             Assert.Equal(0, item.Quality);
         }
         
+        [Fact]
+        public void GivenAgedBrie_WhenUpdatingQuality_ThenQualityIncreasesBy1()
+        {
+            var item = new Item
+            {
+                Name = "Aged Brie",
+                Quality = 1,
+                SellIn = 55
+            };
+            
+            var glidedRose = new GildedRose(new List<Item> { item });
+            glidedRose.UpdateQuality();
+            Assert.Equal(2, item.Quality);
+        }
         
+        [Fact]
+        public void GivenAgedBrieWithSellInZero_WhenUpdatingQuality_ThenQualityIncreasesBy2()
+        {
+            var item = new Item
+            {
+                Name = "Aged Brie",
+                Quality = 1,
+                SellIn = 0
+            };
+            
+            var glidedRose = new GildedRose(new List<Item> { item });
+            glidedRose.UpdateQuality();
+            Assert.Equal(3, item.Quality);
+        }
     }
 }
