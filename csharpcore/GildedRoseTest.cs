@@ -131,6 +131,7 @@ namespace csharpcore
             _gildedRose.UpdateQuality(items);
             Assert.Equal(48, item.Quality);
         }
+        
         [Fact]
         public void GivenBackstagePassWithQuality50AndSellInZero_WhenUpdatingQuality_ThenQualityBecomesZero()
         {
@@ -144,6 +145,23 @@ namespace csharpcore
             var items = new List<Item> { item };
             _gildedRose.UpdateQuality(items);
             Assert.Equal(0, item.Quality);
+        }
+        
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        public void GivenSulfurasWithQuality80_WhenUpdatingQuality_QualityIs80(int sellIn)
+        {
+            var item = new Item
+            {
+                Name = SulfurasHandOfRagnaros,
+                Quality = 80,
+                SellIn = sellIn
+            };
+            
+            var items = new List<Item> { item };
+            _gildedRose.UpdateQuality(items);
+            Assert.Equal(80, item.Quality);
         }
     }
 }
