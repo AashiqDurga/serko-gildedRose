@@ -103,6 +103,21 @@ namespace csharpcore
         }
         
         [Fact]
+        public void GivenBackstagePassWithQuality46AndSellInLessThanSix_WhenUpdatingQuality_ThenQualityShouldIncreaseByThree()
+        {
+            var item = new Item
+            {
+                Name = BackstagePasses,
+                Quality = 46,
+                SellIn = 4
+            };
+            
+            var items = new List<Item> { item };
+            _gildedRose.UpdateQuality(items);
+            Assert.Equal(49, item.Quality);
+        }
+        
+        [Fact]
         public void GivenBackstagePassWithQuality50AndSellInZero_WhenUpdatingQuality_ThenQualityBecomesZero()
         {
             var item = new Item
