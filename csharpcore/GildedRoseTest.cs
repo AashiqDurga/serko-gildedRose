@@ -13,5 +13,21 @@ namespace csharpcore
             app.UpdateQuality();
             Assert.Equal("foo", Items[0].Name);
         }
+
+        [Fact]
+        public void GivenItemWithQualityZero_WhenUpdatingQuality_ThenQualityRemainsZero()
+        {
+            var item = new Item
+            {
+                Name = "zeroQualityItem",
+                Quality = 0
+            };
+            
+            var glidedRose = new GildedRose(new List<Item> { item });
+            glidedRose.UpdateQuality();
+            Assert.Equal(0, item.Quality);
+        }
+        
+        
     }
 }
