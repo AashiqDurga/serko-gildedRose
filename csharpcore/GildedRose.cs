@@ -28,31 +28,7 @@ namespace csharpcore
                 }
                 else
                 {
-                    if (item.Name != BackstagePass)
-                    {
-                        DecreaseQuality(item);
-                    }
-                    else
-                    {
-                        if (item.Quality < 50)
-                        {
-                            item.Quality = item.Quality + 1;
-
-                            if (item.Name == BackstagePass)
-                            {
-                                if (item.SellIn < 11)
-                                {
-                                    IncreaseQuality(item);
-                                }
-
-                                if (item.SellIn < 6)
-                                {
-                                    IncreaseQuality(item);
-                                }
-                            }
-                        }
-                    }
-
+                    DecreaseQuality(item);
                     DecreaseSellIn(item);
                     HandleItemsWithSellInLessThanZero(item);
                 }
@@ -78,7 +54,20 @@ namespace csharpcore
             }
 
             DecreaseSellIn(item);
-            HandleItemsWithSellInLessThanZero(item);
+            if (item.SellIn < 0)
+            {
+                if (item.Name != BackstagePass)
+                {
+                    if (item.Quality > 0)
+                    {
+                        item.Quality = item.Quality - 1;
+                    }
+                }
+                else
+                {
+                    item.Quality = item.Quality - item.Quality;
+                }
+            }
         }
 
         private static void HandleAgedBrie(Item item)
@@ -104,7 +93,7 @@ namespace csharpcore
         {
             if (item.Quality > 0)
             {
-                    item.Quality = item.Quality - 1;
+                item.Quality = item.Quality - 1;
             }
         }
 
@@ -112,17 +101,7 @@ namespace csharpcore
         {
             if (item.SellIn < 0)
             {
-                if (item.Name != BackstagePass)
-                {
-                    if (item.Quality > 0)
-                    {
-                        item.Quality = item.Quality - 1;
-                    }
-                }
-                else
-                {
-                    item.Quality = item.Quality - item.Quality;
-                }
+               DecreaseQuality(item);
             }
         }
 
