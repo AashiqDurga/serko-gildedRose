@@ -22,6 +22,10 @@ namespace csharpcore
                 {
                     HandleBackstagePass(item);
                 }
+                else if (item.Name == SulfurasHandOfRagnaros)
+                {
+                    HandleSulfuras(item);
+                }
                 else
                 {
                     if (item.Name != BackstagePass)
@@ -55,10 +59,14 @@ namespace csharpcore
             }
         }
 
+        private void HandleSulfuras(Item item)
+        {
+        }
+
         private static void HandleBackstagePass(Item item)
         {
             IncreaseQuality(item);
-            
+
             if (item.SellIn < 11)
             {
                 IncreaseQuality(item);
@@ -68,7 +76,7 @@ namespace csharpcore
             {
                 IncreaseQuality(item);
             }
-            
+
             DecreaseSellIn(item);
             HandleItemsWithSellInLessThanZero(item);
         }
@@ -96,10 +104,7 @@ namespace csharpcore
         {
             if (item.Quality > 0)
             {
-                if (item.Name != SulfurasHandOfRagnaros)
-                {
                     item.Quality = item.Quality - 1;
-                }
             }
         }
 
@@ -111,10 +116,7 @@ namespace csharpcore
                 {
                     if (item.Quality > 0)
                     {
-                        if (item.Name != SulfurasHandOfRagnaros)
-                        {
-                            item.Quality = item.Quality - 1;
-                        }
+                        item.Quality = item.Quality - 1;
                     }
                 }
                 else
@@ -126,10 +128,7 @@ namespace csharpcore
 
         private static void DecreaseSellIn(Item item)
         {
-            if (item.Name != SulfurasHandOfRagnaros)
-            {
-                item.SellIn = item.SellIn - 1;
-            }
+            item.SellIn = item.SellIn - 1;
         }
     }
 }
