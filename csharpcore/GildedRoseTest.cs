@@ -5,6 +5,9 @@ namespace csharpcore
 {
     public class GildedRoseTest
     {
+        private const string AgedBrie = "Aged Brie";
+        private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
+        private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
         [Fact]
         public void foo()
         {
@@ -56,6 +59,56 @@ namespace csharpcore
             var glidedRose = new GildedRose(new List<Item> { item });
             glidedRose.UpdateQuality();
             Assert.Equal(3, item.Quality);
+        }
+        
+        [Theory]
+        [InlineData(AgedBrie, 50)]
+
+        public void GivenAgedBrieWithQuality50_WhenUpdatingQuality_ThenQualityRemains50(string itemName, int expected)
+        {
+            var item = new Item
+            {
+                Name = itemName,
+                Quality = 50,
+                SellIn = 0
+            };
+            
+            var glidedRose = new GildedRose(new List<Item> { item });
+            glidedRose.UpdateQuality();
+            Assert.Equal(expected, item.Quality);
+        }
+        
+        [Theory]
+        [InlineData( 1, 50)]
+        [InlineData( 5, 50)]
+        [InlineData( 10, 50)]
+        public void GivenBackstagePassWithQuality50AndSellInGreaterThanZero_WhenUpdatingQuality_ThenQualityRemains50(int sellIn, int expected)
+        {
+            var item = new Item
+            {
+                Name = BackstagePasses,
+                Quality = 50,
+                SellIn = sellIn
+            };
+            
+            var glidedRose = new GildedRose(new List<Item> { item });
+            glidedRose.UpdateQuality();
+            Assert.Equal(expected, item.Quality);
+        }
+        
+        [Fact]
+        public void GivenBackstagePassWithQuality50AndSellInZero_WhenUpdatingQuality_ThenQualityBecomesZero()
+        {
+            var item = new Item
+            {
+                Name = BackstagePasses,
+                Quality = 50,
+                SellIn = 0
+            };
+            
+            var glidedRose = new GildedRose(new List<Item> { item });
+            glidedRose.UpdateQuality();
+            Assert.Equal(0, item.Quality);
         }
     }
 }
