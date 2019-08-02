@@ -14,35 +14,53 @@ namespace csharpcore
             Items = items;
             foreach (var item in Items)
             {
-                if (item.Name != AgedBrie && item.Name != BackstagePasses)
+                if (item.Name == AgedBrie)
                 {
-                    DecreaseQuality(item);
+                    HandleAgedBrie(item);
                 }
                 else
                 {
-                    if (item.Quality < 50)
+                    if (item.Name != BackstagePasses)
                     {
-                        item.Quality = item.Quality + 1;
-
-                        if (item.Name == BackstagePasses)
+                        DecreaseQuality(item);
+                    }
+                    else
+                    {
+                        if (item.Quality < 50)
                         {
-                            if (item.SellIn < 11)
-                            {
-                                IncreaseQuality(item);
-                            }
+                            item.Quality = item.Quality + 1;
 
-                            if (item.SellIn < 6)
+                            if (item.Name == BackstagePasses)
                             {
-                                IncreaseQuality(item);
+                                if (item.SellIn < 11)
+                                {
+                                    IncreaseQuality(item);
+                                }
+
+                                if (item.SellIn < 6)
+                                {
+                                    IncreaseQuality(item);
+                                }
                             }
                         }
                     }
-                }
 
-                DecreaseSellIn(item);
-                HandleItemsWithSellInLessThanZero(item);
+                    DecreaseSellIn(item);
+                    HandleItemsWithSellInLessThanZero(item);
+                }
             }
         }
+
+        private static void HandleAgedBrie(Item item)
+        {
+            IncreaseQuality(item);
+            DecreaseSellIn(item);
+            if (item.SellIn < 0)
+            {
+                IncreaseQuality(item);
+            }
+        }
+
 
         private static void IncreaseQuality(Item item)
         {
@@ -67,29 +85,19 @@ namespace csharpcore
         {
             if (item.SellIn < 0)
             {
-                if (item.Name != AgedBrie)
+                if (item.Name != BackstagePasses)
                 {
-                    if (item.Name != BackstagePasses)
+                    if (item.Quality > 0)
                     {
-                        if (item.Quality > 0)
+                        if (item.Name != SulfurasHandOfRagnaros)
                         {
-                            if (item.Name != SulfurasHandOfRagnaros)
-                            {
-                                item.Quality = item.Quality - 1;
-                            }
+                            item.Quality = item.Quality - 1;
                         }
-                    }
-                    else
-                    {
-                        item.Quality = item.Quality - item.Quality;
                     }
                 }
                 else
                 {
-                    if (item.Quality < 50)
-                    {
-                        item.Quality = item.Quality + 1;
-                    }
+                    item.Quality = item.Quality - item.Quality;
                 }
             }
         }
