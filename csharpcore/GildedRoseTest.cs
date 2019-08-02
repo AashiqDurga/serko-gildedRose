@@ -5,15 +5,21 @@ namespace csharpcore
 {
     public class GildedRoseTest
     {
+        private readonly GildedRose _gildedRose;
+
+        public GildedRoseTest()
+        {
+            _gildedRose = new GildedRose();
+        }
+
         private const string AgedBrie = "Aged Brie";
         private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
         private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
         [Fact]
         public void foo()
         {
-            IList<Item> Items = new List<Item> { new Item { Name = "foo", SellIn = 0, Quality = 0 } };
-            GildedRose app = new GildedRose(Items);
-            app.UpdateQuality();
+            var Items = new List<Item> { new Item { Name = "foo", SellIn = 0, Quality = 0 } };
+            _gildedRose.UpdateQuality(Items);
             Assert.Equal("foo", Items[0].Name);
         }
 
@@ -25,9 +31,9 @@ namespace csharpcore
                 Name = "zeroQualityItem",
                 Quality = 0
             };
-            
-            var glidedRose = new GildedRose(new List<Item> { item });
-            glidedRose.UpdateQuality();
+
+            var items = new List<Item> { item };
+            _gildedRose.UpdateQuality(items);
             Assert.Equal(0, item.Quality);
         }
         
@@ -40,9 +46,9 @@ namespace csharpcore
                 Quality = 1,
                 SellIn = 55
             };
-            
-            var glidedRose = new GildedRose(new List<Item> { item });
-            glidedRose.UpdateQuality();
+
+            var items = new List<Item> { item };
+            _gildedRose.UpdateQuality(items);
             Assert.Equal(2, item.Quality);
         }
         
@@ -56,8 +62,8 @@ namespace csharpcore
                 SellIn = 0
             };
             
-            var glidedRose = new GildedRose(new List<Item> { item });
-            glidedRose.UpdateQuality();
+            var items = new List<Item> { item };
+            _gildedRose.UpdateQuality(items);
             Assert.Equal(3, item.Quality);
         }
         
@@ -73,8 +79,8 @@ namespace csharpcore
                 SellIn = 0
             };
             
-            var glidedRose = new GildedRose(new List<Item> { item });
-            glidedRose.UpdateQuality();
+            var items = new List<Item> { item };
+            _gildedRose.UpdateQuality(items);
             Assert.Equal(expected, item.Quality);
         }
         
@@ -91,8 +97,8 @@ namespace csharpcore
                 SellIn = sellIn
             };
             
-            var glidedRose = new GildedRose(new List<Item> { item });
-            glidedRose.UpdateQuality();
+            var items = new List<Item> { item };
+            _gildedRose.UpdateQuality(items);
             Assert.Equal(expected, item.Quality);
         }
         
@@ -106,8 +112,8 @@ namespace csharpcore
                 SellIn = 0
             };
             
-            var glidedRose = new GildedRose(new List<Item> { item });
-            glidedRose.UpdateQuality();
+            var items = new List<Item> { item };
+            _gildedRose.UpdateQuality(items);
             Assert.Equal(0, item.Quality);
         }
     }

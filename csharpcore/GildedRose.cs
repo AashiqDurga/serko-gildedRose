@@ -8,13 +8,10 @@ namespace csharpcore
         private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
         private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
         IList<Item> Items;
-        public GildedRose(IList<Item> Items)
-        {
-            this.Items = Items;
-        }
 
-        public void UpdateQuality()
+        public void UpdateQuality(IList<Item> items)
         {
+            Items = items;
             for (var i = 0; i < Items.Count; i++)
             {
                 if (Items[i].Name != AgedBrie && Items[i].Name != BackstagePasses)
