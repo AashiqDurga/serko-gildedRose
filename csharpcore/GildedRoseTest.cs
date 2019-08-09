@@ -224,22 +224,7 @@ namespace csharpcore
             Assert.Equal(8, item.Quality);
         }
 
-        [Fact]
-        public void GivenAgedBrieSmartItem_WhenUpdateQuality_QualityIncreasesBy1()
-        {
-            var agedBrieItem = new Item
-            {
-                Name = AgedBrie,
-                Quality = 10,
-                SellIn = 10
 
-            };
-            var smartItem = new AgedBrieSmartItem(agedBrieItem);
-
-            smartItem.Update();
-            
-            Assert.Equal(11, smartItem.Item.Quality);
-        }
 
         [Fact]
         public void GivenSulfurasSmartItem_WhenUpdateQuality_QualityRemainsSame()
