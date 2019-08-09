@@ -17,7 +17,9 @@ namespace csharpcore
             {
                 if (item.Name == AgedBrie)
                 {
-                    HandleAgedBrie(item);
+                    var smartAgedBrie = new AgedBrieSmartItem(item);
+                    smartAgedBrie.Update();
+                    
                 }
                 else if (item.Name == BackstagePass)
                 {
