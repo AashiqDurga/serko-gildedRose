@@ -223,5 +223,37 @@ namespace csharpcore
             _gildedRose.UpdateQuality(items);
             Assert.Equal(8, item.Quality);
         }
+
+        [Fact]
+        public void GivenAgedBrieSmartItem_WhenUpdateQuality_QualityIncreasesBy1()
+        {
+            var item = new Item
+            {
+                Name = AgedBrie,
+                Quality = 10,
+                SellIn = 10
+
+            };
+            var smartItem = new SmartItem(item);
+
+            smartItem.Update();
+            
+            Assert.Equal(11, smartItem.Item.Quality);
+        }
+    }
+
+    public class SmartItem
+    {
+        public Item Item { get; set; }
+        
+        public SmartItem(Item item)
+        {
+            Item = item;
+        }
+
+        public void Update()
+        {
+            Item.Quality++;
+        }
     }
 }
