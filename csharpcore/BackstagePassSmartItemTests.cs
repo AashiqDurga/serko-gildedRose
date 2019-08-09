@@ -85,41 +85,41 @@ namespace csharpcore
 
         public void Update()
         {
-            HandleBackstagePass(Item);
+            HandleBackstagePass();
         }
         
-        private static void HandleBackstagePass(Item item)
+        private void HandleBackstagePass()
         {
-            IncreaseQuality(item);
+            IncreaseQuality();
 
-            if (item.SellIn < 11)
+            if (Item.SellIn <= 10)
             {
-                IncreaseQuality(item);
+                IncreaseQuality();
             }
 
-            if (item.SellIn < 6)
+            if (Item.SellIn <= 5)
             {
-                IncreaseQuality(item);
+                IncreaseQuality();
             }
 
-            DecreaseSellIn(item);
-            if (item.SellIn < 0)
+            DecreaseSellIn();
+            if (Item.SellIn < 0)
             {
-                item.Quality = item.Quality - item.Quality;
+                Item.Quality = 0;
             }
         }
         
-        private static void IncreaseQuality(Item item)
+        private void IncreaseQuality()
         {
-            if (item.Quality < 50)
+            if (Item.Quality < 50)
             {
-                item.Quality = item.Quality + 1;
+                Item.Quality++;
             }
         }
 
-        private static void DecreaseSellIn(Item item)
+        private void DecreaseSellIn()
         {
-            item.SellIn = item.SellIn - 1;
+            Item.SellIn--;
         }
     }
 }
