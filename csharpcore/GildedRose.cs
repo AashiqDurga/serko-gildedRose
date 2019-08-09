@@ -19,13 +19,17 @@ namespace csharpcore
                 {
                     var smartAgedBrie = new AgedBrieSmartItem(item);
                     smartAgedBrie.Update();
-                    
+                }
+                else if (item.Name == SulfurasHandOfRagnaros)
+                {
+                    var smartAgedBrie = new SulfurasSmartItem(item);
+                    smartAgedBrie.Update();
                 }
                 else if (item.Name == BackstagePass)
                 {
                     HandleBackstagePass(item);
                 }
-                else if (item.Name != SulfurasHandOfRagnaros)
+                else
                 {
                     DecreaseQuality(item);
                     DecreaseSellIn(item);
