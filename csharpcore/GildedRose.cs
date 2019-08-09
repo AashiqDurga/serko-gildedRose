@@ -32,33 +32,10 @@ namespace csharpcore
                 }
                 else
                 {
-                    DecreaseQuality(item);
-                    DecreaseSellIn(item);
-                    HandleItemsWithSellInLessThanZero(item);   
+                    var genericSmartItem = new GenericSmartItem(item);
+                    genericSmartItem.Update();
                 }
             }
-        }
-
-
-        private static void DecreaseQuality(Item item)
-        {
-            if (item.Quality > 0)
-            {
-                item.Quality = item.Quality - 1;
-            }
-        }
-
-        private static void HandleItemsWithSellInLessThanZero(Item item)
-        {
-            if (item.SellIn < 0)
-            {
-               DecreaseQuality(item);
-            }
-        }
-
-        private static void DecreaseSellIn(Item item)
-        {
-            item.SellIn = item.SellIn - 1;
         }
     }
 }
