@@ -79,41 +79,4 @@ namespace csharpcore
             Assert.Equal(8, smartItemGeneric.Item.Quality);
         }
     }
-
-    public class GenericSmartItem : ISmartItem
-    {
-        public GenericSmartItem(Item item)
-        {
-            Item = item;
-        }
-
-        public Item Item { get; set; }
-        public void Update()
-        {
-            DecreaseQuality(Item);
-            DecreaseSellIn(Item);
-            HandleItemsWithSellInLessThanZero(Item);  
-        }
-        
-        private static void DecreaseQuality(Item item)
-        {
-            if (item.Quality > 0)
-            {
-                item.Quality = item.Quality - 1;
-            }
-        }
-
-        private static void HandleItemsWithSellInLessThanZero(Item item)
-        {
-            if (item.SellIn < 0)
-            {
-                DecreaseQuality(item);
-            }
-        }
-
-        private static void DecreaseSellIn(Item item)
-        {
-            item.SellIn = item.SellIn - 1;
-        }
-    }
 }
