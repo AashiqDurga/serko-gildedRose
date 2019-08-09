@@ -9,9 +9,27 @@ namespace csharpcore
             Item = item;
         }
 
+        private void IncreaseQuality()
+        {
+            if (Item.Quality < 50)
+            {
+                Item.Quality++;
+            }
+        }
+        
+        private void DecreaseSellIn()
+        {
+            Item.SellIn--;
+        }
+        
         public void Update()
         {
-            Item.Quality++;
+            IncreaseQuality();
+            DecreaseSellIn();
+            if (Item.SellIn < 0)
+            {
+                IncreaseQuality();
+            }
         }
     }
 }
