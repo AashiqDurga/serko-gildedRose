@@ -22,12 +22,13 @@ namespace csharpcore
                 }
                 else if (item.Name == SulfurasHandOfRagnaros)
                 {
-                    var smartAgedBrie = new SulfurasSmartItem(item);
-                    smartAgedBrie.Update();
+                    var sulfurasSmartItem = new SulfurasSmartItem(item);
+                    sulfurasSmartItem.Update();
                 }
                 else if (item.Name == BackstagePass)
                 {
-                    HandleBackstagePass(item);
+                    var backstagePassSmartItem = new BackstagePassSmartItem(item);
+                    backstagePassSmartItem.Update();
                 }
                 else
                 {
@@ -37,46 +38,7 @@ namespace csharpcore
                 }
             }
         }
-        
-        private static void HandleBackstagePass(Item item)
-        {
-            IncreaseQuality(item);
 
-            if (item.SellIn < 11)
-            {
-                IncreaseQuality(item);
-            }
-
-            if (item.SellIn < 6)
-            {
-                IncreaseQuality(item);
-            }
-
-            DecreaseSellIn(item);
-            if (item.SellIn < 0)
-            {
-                item.Quality = item.Quality - item.Quality;
-            }
-        }
-
-        private static void HandleAgedBrie(Item item)
-        {
-            IncreaseQuality(item);
-            DecreaseSellIn(item);
-            if (item.SellIn < 0)
-            {
-                IncreaseQuality(item);
-            }
-        }
-
-
-        private static void IncreaseQuality(Item item)
-        {
-            if (item.Quality < 50)
-            {
-                item.Quality = item.Quality + 1;
-            }
-        }
 
         private static void DecreaseQuality(Item item)
         {
