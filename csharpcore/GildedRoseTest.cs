@@ -227,33 +227,35 @@ namespace csharpcore
         [Fact]
         public void GivenAgedBrieSmartItem_WhenUpdateQuality_QualityIncreasesBy1()
         {
-            var item = new Item
+            var agedBrieItem = new Item
             {
                 Name = AgedBrie,
                 Quality = 10,
                 SellIn = 10
 
             };
-            var smartItem = new SmartItem(item);
+            var smartItem = new AgedBrieSmartItem(agedBrieItem);
 
             smartItem.Update();
             
             Assert.Equal(11, smartItem.Item.Quality);
         }
-    }
 
-    public class SmartItem
-    {
-        public Item Item { get; set; }
-        
-        public SmartItem(Item item)
+        [Fact]
+        public void GivenSulfurasSmartItem_WhenUpdateQuality_QualityRemainsSame()
         {
-            Item = item;
-        }
+            var sulfurasItem = new Item
+            {
+                Name = SulfurasHandOfRagnaros,
+                Quality = 10,
+                SellIn = 10
 
-        public void Update()
-        {
-            Item.Quality++;
+            };
+            var smartItem = new SulfurasSmartItem(sulfurasItem);
+
+            smartItem.Update();
+            
+            Assert.Equal(10, smartItem.Item.Quality);
         }
     }
 }
