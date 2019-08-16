@@ -56,5 +56,29 @@ namespace csharpcore
             Assert.Equal(duplicateItem.Quality, item.Quality);
             Assert.Equal(duplicateItem.SellIn, item.SellIn);
         }
+        
+        [Fact]
+        public void GivenBackStagePassItem_UpdatesAccordingToBackStagePassSmartItem()
+        {
+            var item = new Item
+            {
+                Name = BackstagePass,
+                Quality = 45
+            };
+
+            var duplicateItem = new Item
+            {
+                Name = BackstagePass,
+                Quality = 45
+            };
+
+            var smartItem = new BackstagePassSmartItem(duplicateItem);
+            smartItem.Update();
+            
+            var gildedRose = new GildedRose();
+            gildedRose.UpdateQuality(new List<Item> { item });
+            Assert.Equal(duplicateItem.Quality, item.Quality);
+            Assert.Equal(duplicateItem.SellIn, item.SellIn);
+        }
     }
 }
