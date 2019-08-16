@@ -14,7 +14,7 @@ namespace csharpcore
         [InlineData(BackstagePass, typeof(BackstagePassSmartItem))]
         [InlineData(SulfurasHandOfRagnaros, typeof(SulfurasSmartItem))]
         [InlineData("generic-item", typeof(GenericSmartItem))]
-        public void GivenItemWithNameAgedBrie_ReturnsAgedBrieSmartItem(string itemName, Type expectedType)
+        public void GivenItemName_ReturnsValidSmartItem(string itemName, Type expectedType)
         {
             var item = new Item
             {
