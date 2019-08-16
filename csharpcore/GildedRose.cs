@@ -28,17 +28,17 @@ namespace csharpcore
                 }
                 else if (item.Name == SulfurasHandOfRagnaros)
                 {
-                    var sulfurasSmartItem = new SulfurasSmartItem(item);
+                    var sulfurasSmartItem = _smartItemFactory.Create(item);
                     sulfurasSmartItem.Update();
                 }
                 else if (item.Name == BackstagePass)
                 {
-                    var backstagePassSmartItem = new BackstagePassSmartItem(item);
+                    var backstagePassSmartItem = _smartItemFactory.Create(item);
                     backstagePassSmartItem.Update();
                 }
                 else
                 {
-                    var genericSmartItem = new GenericSmartItem(item);
+                    var genericSmartItem = _smartItemFactory.Create(item);
                     genericSmartItem.Update();
                 }
             }

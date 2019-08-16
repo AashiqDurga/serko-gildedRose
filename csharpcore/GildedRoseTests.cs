@@ -19,95 +19,26 @@ namespace csharpcore
         private const string BackstagePass = "Backstage passes to a TAFKAL80ETC concert";
         private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
         
-        
-        [Fact]
-        public void GivenSulfurasItem_UpdatesAccordingToSulfurasSmartItem()
+        [Theory]
+        [InlineData(AgedBrie)]
+        [InlineData(SulfurasHandOfRagnaros)]
+        [InlineData(BackstagePass)]
+        [InlineData("Generic")]
+        public void GivenItemList_UpdatesItem(string itemName)
         {
             var item = new Item
             {
-                Name = SulfurasHandOfRagnaros,
+                Name = itemName,
                 Quality = 45
             };
 
-            var duplicateItem = new Item
-            {
-                Name = SulfurasHandOfRagnaros,
-                Quality = 45
-            };
-
-            var smartItem = new SulfurasSmartItem(duplicateItem);
-            smartItem.Update();
-            
-            _gildedRose.UpdateQuality(new List<Item> { item });
-            Assert.Equal(duplicateItem.Quality, item.Quality);
-            Assert.Equal(duplicateItem.SellIn, item.SellIn);
-            Assert.Equal(duplicateItem.Name, item.Name);
-        }
-        
-        [Fact]
-        public void GivenBackStagePassItem_UpdatesAccordingToBackStagePassSmartItem()
-        {
-            var item = new Item
-            {
-                Name = BackstagePass,
-                Quality = 45
-            };
-
-            var duplicateItem = new Item
-            {
-                Name = BackstagePass,
-                Quality = 45
-            };
-
-            var smartItem = new BackstagePassSmartItem(duplicateItem);
-            smartItem.Update();
-            
-            _gildedRose.UpdateQuality(new List<Item> { item });
-            Assert.Equal(duplicateItem.Quality, item.Quality);
-            Assert.Equal(duplicateItem.SellIn, item.SellIn);
-            Assert.Equal(duplicateItem.Name, item.Name);
-        }
-        
-        [Fact]
-        public void GivenGenericItem_UpdatesAccordingToGenericSmartItem()
-        {
-            var item = new Item
-            {
-                Name = "Generic",
-                Quality = 45
-            };
-
-            var duplicateItem = new Item
-            {
-                Name = "Generic",
-                Quality = 45
-            };
-
-            var smartItem = new GenericSmartItem(duplicateItem);
-            smartItem.Update();
-            
-            _gildedRose.UpdateQuality(new List<Item> { item });
-            Assert.Equal(duplicateItem.Quality, item.Quality);
-            Assert.Equal(duplicateItem.SellIn, item.SellIn);
-            Assert.Equal(duplicateItem.Name, item.Name);
-        }
-
-        [Fact]
-        public void GivenItemList_UpdatesItem()
-        {
-            var agedBrie = new Item
-            {
-                Name = AgedBrie,
-                Quality = 45
-            };
-
-            var items = new List<Item> {agedBrie};
+            var items = new List<Item> {item};
 
             var smartItemMock = new Mock<ISmartItem>();
-            _smartItemFactoryMock.Setup(f => f.Create(agedBrie)).Returns(smartItemMock.Object);
+            _smartItemFactoryMock.Setup(f => f.Create(item)).Returns(smartItemMock.Object);
             _gildedRose.UpdateQuality(items);
 
-            _smartItemFactoryMock.Verify(f => f.Create(agedBrie), Times.Once);
+            _smartItemFactoryMock.Verify(f => f.Create(item), Times.Once);
             smartItemMock.Verify(i => i.Update(), Times.Once);
         }
     }
