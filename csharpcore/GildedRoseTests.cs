@@ -32,5 +32,29 @@ namespace csharpcore
             Assert.Equal(duplicateItem.Quality, item.Quality);
             Assert.Equal(duplicateItem.SellIn, item.SellIn);
         }
+        
+        [Fact]
+        public void GivenSulfurasItem_UpdatesAccordingToSulfurasSmartItem()
+        {
+            var item = new Item
+            {
+                Name = SulfurasHandOfRagnaros,
+                Quality = 45
+            };
+
+            var duplicateItem = new Item
+            {
+                Name = SulfurasHandOfRagnaros,
+                Quality = 45
+            };
+
+            var smartItem = new SulfurasSmartItem(duplicateItem);
+            smartItem.Update();
+            
+            var gildedRose = new GildedRose();
+            gildedRose.UpdateQuality(new List<Item> { item });
+            Assert.Equal(duplicateItem.Quality, item.Quality);
+            Assert.Equal(duplicateItem.SellIn, item.SellIn);
+        }
     }
 }
