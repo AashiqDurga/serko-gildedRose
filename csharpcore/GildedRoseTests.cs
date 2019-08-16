@@ -31,6 +31,7 @@ namespace csharpcore
             gildedRose.UpdateQuality(new List<Item> { item });
             Assert.Equal(duplicateItem.Quality, item.Quality);
             Assert.Equal(duplicateItem.SellIn, item.SellIn);
+            Assert.Equal(duplicateItem.Name, item.Name);
         }
         
         [Fact]
@@ -55,6 +56,7 @@ namespace csharpcore
             gildedRose.UpdateQuality(new List<Item> { item });
             Assert.Equal(duplicateItem.Quality, item.Quality);
             Assert.Equal(duplicateItem.SellIn, item.SellIn);
+            Assert.Equal(duplicateItem.Name, item.Name);
         }
         
         [Fact]
@@ -79,6 +81,7 @@ namespace csharpcore
             gildedRose.UpdateQuality(new List<Item> { item });
             Assert.Equal(duplicateItem.Quality, item.Quality);
             Assert.Equal(duplicateItem.SellIn, item.SellIn);
+            Assert.Equal(duplicateItem.Name, item.Name);
         }
         
         [Fact]
