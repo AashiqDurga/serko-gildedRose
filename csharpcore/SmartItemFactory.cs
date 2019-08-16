@@ -1,6 +1,6 @@
 namespace csharpcore
 {
-    public class SmartItemFactory
+    public class SmartItemFactory:ISmartItemFactory
     {
         private const string AgedBrie = "Aged Brie";
         private const string BackstagePass = "Backstage passes to a TAFKAL80ETC concert";
@@ -19,5 +19,10 @@ namespace csharpcore
 
             return new GenericSmartItem(item);
         }
+    }
+
+    public interface ISmartItemFactory
+    {
+        ISmartItem Create(Item item);
     }
 }

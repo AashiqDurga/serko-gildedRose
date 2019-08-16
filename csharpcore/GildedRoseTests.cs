@@ -108,5 +108,21 @@ namespace csharpcore
             Assert.Equal(duplicateItem.SellIn, item.SellIn);
             Assert.Equal(duplicateItem.Name, item.Name);
         }
+
+        [Fact]
+        public void GivenItemList_UpdatesItem()
+        {
+            var agedBrie = new Item
+            {
+                Name = AgedBrie,
+                Quality = 45
+            };
+
+            var items = new List<Item> {agedBrie};
+            var gildedRose = new GildedRose();
+            gildedRose.UpdateQuality(items);
+            
+            
+        }
     }
 }
