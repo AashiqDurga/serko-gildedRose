@@ -6,11 +6,7 @@ namespace csharpcore
     public class GildedRose
     {
         private readonly ISmartItemFactory _smartItemFactory;
-        private const string AgedBrie = "Aged Brie";
-        private const string BackstagePass = "Backstage passes to a TAFKAL80ETC concert";
-        private const string SulfurasHandOfRagnaros = "Sulfuras, Hand of Ragnaros";
-        IList<Item> Items;
-
+        
         public GildedRose(ISmartItemFactory smartItemFactory)
         {
             _smartItemFactory = smartItemFactory;
@@ -18,30 +14,16 @@ namespace csharpcore
 
         public void UpdateQuality(IList<Item> items)
         {
-            Items = items;
-            foreach (var item in Items)
+            foreach (var item in items)
             {
-                if (item.Name == AgedBrie)
-                {
-                    var smartAgedBrie = _smartItemFactory.Create(item);
-                    smartAgedBrie.Update();
-                }
-                else if (item.Name == SulfurasHandOfRagnaros)
-                {
-                    var sulfurasSmartItem = _smartItemFactory.Create(item);
-                    sulfurasSmartItem.Update();
-                }
-                else if (item.Name == BackstagePass)
-                {
-                    var backstagePassSmartItem = _smartItemFactory.Create(item);
-                    backstagePassSmartItem.Update();
-                }
-                else
-                {
-                    var genericSmartItem = _smartItemFactory.Create(item);
-                    genericSmartItem.Update();
-                }
+                UpdateItem(item);
             }
+        }
+
+        private void UpdateItem(Item item)
+        {
+            var smartItem = _smartItemFactory.Create(item);
+            smartItem.Update();
         }
     }
 }
