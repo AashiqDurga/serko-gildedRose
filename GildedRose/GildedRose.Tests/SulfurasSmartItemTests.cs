@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace csharpcore
+namespace GildedRose.Implementation.GildedRose.Tests
 {
     public class SulfurasSmartItemTests
     {

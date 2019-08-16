@@ -2,17 +2,17 @@ using System.Collections.Generic;
 using Moq;
 using Xunit;
 
-namespace csharpcore
+namespace GildedRose.Implementation.GildedRose.Tests
 {
     public class GildedRoseTests
     {
-        private readonly GildedRose _gildedRose;
+        private readonly GildedRoseFoo _gildedRose;
         private readonly Mock<ISmartItemFactory> _smartItemFactoryMock;
 
         public GildedRoseTests()
         {
             _smartItemFactoryMock = new Mock<ISmartItemFactory>();
-            _gildedRose = new GildedRose(_smartItemFactoryMock.Object);
+            _gildedRose = new GildedRoseFoo(_smartItemFactoryMock.Object);
         }
 
         private const string AgedBrie = "Aged Brie";

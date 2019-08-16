@@ -1,4 +1,4 @@
-namespace csharpcore
+namespace GildedRose.Implementation
 {
     public interface ISmartItem
     {

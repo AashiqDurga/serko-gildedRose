@@ -1,7 +1,6 @@
 ﻿using Xunit;
-using System.Collections.Generic;
 
-namespace csharpcore
+namespace GildedRose.Implementation.GildedRose.Tests
 {
     public class GenericSmartItemTests
     {

@@ -1,4 +1,4 @@
-namespace csharpcore
+namespace GildedRose.Implementation
 {
     public class AgedBrieSmartItem : ISmartItem
     {

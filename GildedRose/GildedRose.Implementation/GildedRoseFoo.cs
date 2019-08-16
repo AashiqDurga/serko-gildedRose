@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
-using csharpcore;
 
-namespace csharpcore
+namespace GildedRose.Implementation
 {
-    public class GildedRose
+    public class GildedRoseFoo
     {
         private readonly ISmartItemFactory _smartItemFactory;
         
-        public GildedRose(ISmartItemFactory smartItemFactory)
+        public GildedRoseFoo(ISmartItemFactory smartItemFactory)
         {
             _smartItemFactory = smartItemFactory;
         }
 
-        public void UpdateQuality(IList<Item> items)
+        public void UpdateQuality(IEnumerable<Item> items)
         {
             foreach (var item in items)
             {

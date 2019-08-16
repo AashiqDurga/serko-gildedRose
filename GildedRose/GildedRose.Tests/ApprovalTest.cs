@@ -1,9 +1,9 @@
-﻿using Xunit;
-using System;
+﻿using System;
 using System.IO;
 using System.Text;
+using Xunit;
 
-namespace csharpcore
+namespace GildedRose.Implementation.GildedRose.Tests
 {
     public class ApprovalTest
     {
